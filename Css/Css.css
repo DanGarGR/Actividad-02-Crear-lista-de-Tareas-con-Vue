@@ -1,0 +1,12 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .text-decoration-line-through {
+    text-decoration: line-through;
+  }
+  
+  .progress-bar {
+    transition: width 0.5s ease;
+  }
+  

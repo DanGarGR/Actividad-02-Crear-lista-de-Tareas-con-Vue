@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Tareas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./Css/Css.css">
+  <script src="./Js/vue3.js"></script>
+</head>
+<body>
+  <div id="app" class="container mt-5">
+    <h1 class="text-center">Lista de Tareas</h1>
+    
+    <!-- Descripción de la página -->
+    <h5 class="text-center text-muted">
+      Esta aplicación está diseñada para ayudarte a organizar y gestionar tus actividades diarias de manera efectiva. Podrás añadir nuevas tareas a tu lista, marcarlas como completadas una vez que hayas terminado, y eliminarlas cuando ya no sean necesarias. Cada tarea completada contribuye a una barra de progreso, que te permite visualizar tu avance general, motivándote a cumplir con todas tus obligaciones. Con esta herramienta, llevar un registro de tus pendientes se vuelve más fácil y satisfactorio, ayudándote a mejorar la productividad y el cumplimiento de tus metas diarias. Ideal para estudiantes, profesionales y cualquier persona que desee mantener sus tareas bajo control.
+    </h5>
+    
+    <!-- Barra de tareas -->
+    <input type="text" class="form-control mb-3" v-model="newTask" placeholder="Escribe una tarea" @keyup.enter="addTask">
+    
+    <!-- Lista de Tareas -->
+    <ul class="list-group mb-3">
+      <li v-for="(task, index) in tasks" :key="index" class="list-group-item d-flex justify-content-between align-items-center">
+        <span :class="{ 'text-decoration-line-through': task.completed }">{{ task.text }}</span>
+        
+        <!-- Botones de Tarea -->
+        <div>
+          <button @click="toggleTask(index)" :class="['btn', task.completed ? 'btn-success' : 'btn-secondary']">
+            {{ task.completed ? 'Realizado' : 'No realizado' }}
+          </button>
+          <button @click="deleteTask(index)" class="btn btn-danger ms-2">Eliminar</button>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Barra de Progreso -->
+    <div class="progress mb-3">
+      <div class="progress-bar" :style="{ width: progress + '%' }">{{ progress }}%</div>
+    </div>
+
+    <!-- Conteo de Tareas Completadas -->
+    <p>Has completado {{ completedTasks }} de {{ tasks.length }} tareas.</p>
+  </div>
+  <script src="./Js/script.js"></script>
+</body>
+</html>
